@@ -29,7 +29,7 @@ main(const int argc, const char * argv[])
   int answer; // the secret number to guess
   int guess;  // the user's guess
   int max;    // we'll pick a number in [1..max]
-
+  int guessLimit = 10;
   // interpret arguments
   if (argc == 1) {
     // no arguments (other than the command) - use default value
@@ -58,6 +58,14 @@ main(const int argc, const char * argv[])
       printf("too high!\n");
     } else {
       printf("too low!\n");
+    }
+    if (guessLimit <= 1) {
+      printf("Too many guesses!");
+      printf("The answer was %d\n", answer);
+      return 0;  // exit status 
+    } else {
+      guessLimit--;
+      printf("You have %d guesses left\n", guessLimit);
     }
     guess = askGuess(1, max);
   }
